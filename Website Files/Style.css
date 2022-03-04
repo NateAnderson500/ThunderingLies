@@ -1,11 +1,17 @@
+ body {
+    color: rgb(255, 255, 255);
+    font-size: large;
+    background-image: url(/ImageFiles/StarBackground.jpeg);
+ }
+
  header {
     width: auto;
     text-align: center;
  }
 
  nav {
-     width: auto;
-     text-align: center;
+    width: auto;
+    text-align: center;
  }
 
  .about {
