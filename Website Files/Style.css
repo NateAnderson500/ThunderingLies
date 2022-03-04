@@ -1,6 +1,7 @@
  body {
     color: rgb(255, 255, 255);
     font-size: large;
+    /*Image found at -> https://t4.ftcdn.net/jpg/02/15/94/83/360_F_215948377_kgIhNUy4X0iYsyUfYd9KKIViSPOxclbC.jpg*/
     background-image: url(ImageFiles/StarBackground.jpeg);
  }
 
