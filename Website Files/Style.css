@@ -1,7 +1,7 @@
  body {
     color: rgb(255, 255, 255);
     font-size: large;
-    background-image: url(/ImageFiles/StarBackground.jpeg);
+    background-image: url(ImageFiles/StarBackground.jpeg);
  }
 
  header {
