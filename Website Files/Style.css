@@ -15,6 +15,11 @@
  }
 
  .about {
-     width: auto;
-     text-align: center;
+    width: auto;
+    text-align: center;
+ }
+
+ .Mission {
+    width: auto;
+    text-align: center;
  }
