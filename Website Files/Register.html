@@ -37,6 +37,7 @@
     </div>
     
     <script>
+        //check if passwords match
         function checkPasswords() {
             if (document.getElementById('password').value == document.getElementById('confirmPassword').value) {
                 document.getElementById('check').disabled = false;
@@ -46,6 +47,7 @@
             }
         }
 
+        //check password strength
         function checkPasswordStrength() {
             var password = document.getElementById('password').value;
             var confirmPassword = document.getElementById('confirmPassword').value;
