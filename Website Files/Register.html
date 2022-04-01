@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="Style.css">
-
-    
+    <link rel="stylesheet" href="Style.css">    
 </head>
 
 <body>
@@ -34,7 +32,7 @@
             <label for="password">Confirm Password:</label>
             <input type="password" name="confirmPassword" id="confirmPassword" onkeyup='checkPasswords();' required />
 
-            <input type="submit" value="Register" id="check" disabled>
+            <input type="button" value="Register" id="check" onclick='checkPasswordStrength();' disabled>
         </form>
     </div>
     
@@ -48,9 +46,63 @@
             }
         }
 
-        //see if the password is strong enough
         function checkPasswordStrength() {
-            
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var username = document.getElementById('username').value;
+            var strength = 0;
+
+            if (password.length <= 8) {
+                document.getElementById('password').style.backgroundColor = 'red';
+                document.getElementById('confirmPassword').style.backgroundColor = 'red';
+            }
+            else {
+                document.getElementById('password').style.backgroundColor = 'white';
+                document.getElementById('confirmPassword').style.backgroundColor = 'white';
+                strength++;
+            }
+
+            if (password.search(/[a-z]/) != -1) {
+                strength++;
+            }
+
+            if (password.search(/[A-Z]/) != -1) {
+                strength++;
+            }
+
+            if (password.search(/[0-9]/) != -1) {
+                strength++;
+            }
+
+            if (password.search(/[!@#$%^&*]/) != -1) {
+                strength++;
+            }
+
+            if (strength < 2) {
+                document.getElementById('password').style.backgroundColor = 'red';
+                document.getElementById('confirmPassword').style.backgroundColor = 'red';
+                
+            }
+
+            else if (strength == 2) {
+                document.getElementById('password').style.backgroundColor = 'yellow';
+                document.getElementById('confirmPassword').style.backgroundColor = 'yellow';
+            }
+
+            else if (strength == 3) {
+                document.getElementById('password').style.backgroundColor = 'green';
+                document.getElementById('confirmPassword').style.backgroundColor = 'green';
+            }
+
+            else if (strength == 4) {
+                document.getElementById('password').style.backgroundColor = 'blue';
+                document.getElementById('confirmPassword').style.backgroundColor = 'blue';
+            }
+
+            else if (strength == 5) {
+                document.getElementById('password').style.backgroundColor = 'purple';
+                document.getElementById('confirmPassword').style.backgroundColor = 'purple';
+            }
         }
     </script>
 </body>
