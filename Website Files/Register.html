@@ -7,18 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="Style.css">
+
     <script>
-        //Check if passwords match
-        function checkPasswordMatch() {
-            var password = $("#password").val();
-            var confirmPassword = $("#confirmPassword").val();
-
-            if (password != confirmPassword)
-                $("#divCheckPasswordMatch").html("Passwords do not match!");
-            else
-                $("#divCheckPasswordMatch").html("Passwords match.");
-        }
-
         //score password
         function checkPasswordStrength() {
             var password = $("#password").val();
@@ -76,24 +66,45 @@
 
 <body>
 
+    <nav>
+        <a href="./WelcomePage.html" style="color: rgb(255, 255, 255);">Home</a>
+        <a href="./StoryOverview.html" style="color: rgb(255, 255, 255);">Story Overview</a>
+        <a href="./OpenPositions.html" style="color: rgb(255, 255, 255);">Careers</a>
+        <a href="https://github.com/NateAnderson500/ThunderingLies" style="color: rgb(255, 255, 255); ">Github</a>
+        <a href="Login.html " style="color: rgb(255, 255, 255); ">Login</a>
+    </nav>
 
     <!--Registration form-->
-    <div class="registration">
+    <div class=" registration ">
         <h1>Register</h1>
-        <form action="Register.html" method="post">
+        <form action="Register.html" method="post ">
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" required>
+
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name=" password" id="password" required>
+
             <label for="password">Confirm Password:</label>
             <input type="password" name="confirmPassword" id="confirmPassword" required>
-            <input type="submit" onclick="checkPasswordMatch()" value="Register">
+
+            <input type="submit" value="Check Password">
         </form>
-        <p>Already have an account?</p>
-        <a href="Login.html" style="color: rgb(255, 255, 255);">Login here!</a>
     </div>
 
+    <div id="divCheckPasswordMatch">
+        <script>
+            //Check if passwords match
+            function checkPasswordMatch() {
+                var password = $("#password").val();
+                var confirmPassword = $("#confirmPassword").val();
 
+                if (password != confirmPassword)
+                    $("#divCheckPasswordMatch").html("Passwords do not match.");
+                else
+                    $("#divCheckPasswordMatch").html("Passwords match.");
+            }
+        </script>
+    </div>
 
 </body>
 
