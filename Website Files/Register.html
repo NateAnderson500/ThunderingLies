@@ -7,21 +7,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="Style.css">
+    <script>
+        //Check if passwords match
+        function checkPasswordMatch() {
+            var password = $("#password").val();
+            var confirmPassword = $("#confirmPassword").val();
+
+            if (password != confirmPassword)
+                $("#divCheckPasswordMatch").html("Passwords do not match!");
+            else
+                $("#divCheckPasswordMatch").html("Passwords match.");
+        }
+
+        //score password
+        function checkPasswordStrength() {
+            var password = $("#password").val();
+            var passwordStrength = $("#passwordStrength");
+
+            //Regular Expressions
+            var regex = new Array();
+            regex.push("[A-Z]"); //Uppercase Alphabet.
+            regex.push("[a-z]"); //Lowercase Alphabet.
+            regex.push("[0-9]"); //Digit.
+            regex.push("[$@$!%*#?&]"); //Special Character.
+
+            var passed = 0;
+
+            //Validate for each Regular Expression.
+            for (var i = 0; i < regex.length; i++) {
+                if (new RegExp(regex[i]).test(password)) {
+                    passed++;
+                }
+            }
+
+            //Validate for length of Password.
+            if (passed > 2 && password.length > 8) {
+                passed++;
+            }
+
+            //Display status.
+            var color = "";
+            var strength = "";
+            switch (passed) {
+                case 0:
+                case 1:
+                    strength = "Weak";
+                    color = "red";
+                    break;
+                case 2:
+                    strength = "Good";
+                    color = "darkorange";
+                    break;
+                case 3:
+                case 4:
+                    strength = "Strong";
+                    color = "green";
+                    break;
+                case 5:
+                    strength = "Very Strong";
+                    color = "darkgreen";
+                    break;
+            }
+            passwordStrength.html(strength);
+            passwordStrength.css("color", color);
+        }
+    </script>
 </head>
 
 <body>
+
+
     <!--Registration form-->
     <div class="registration">
         <h1>Register</h1>
-        <form action="Register.php" method="post">
+        <form action="Register.html" method="post">
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" required>
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" required>
             <label for="password">Confirm Password:</label>
             <input type="password" name="confirmPassword" id="confirmPassword" required>
-            <input type="submit" value="Register">
+            <input type="submit" onclick="checkPasswordMatch()" value="Register">
         </form>
+        <p>Already have an account?</p>
+        <a href="Login.html" style="color: rgb(255, 255, 255);">Login here!</a>
+    </div>
+
+
+
 </body>
 
 </html>
