@@ -93,7 +93,7 @@ public class UserInterface implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 BufferedImage image = null;
                 try {
-                    image = ImageIO.read(new File("PlanetsMap.png"));
+                    image = ImageIO.read(new File("assets/misc/planetscolor.png"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
