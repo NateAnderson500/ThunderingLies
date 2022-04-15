@@ -9,7 +9,7 @@
  //creates main method
     public class ArcadianSys {
         //creates array
-        public static String[][] arcadian = new String[100][100];
+        public static String[][] arcadian = new String[16][5];
         
         //creates main method
         public static void main(String[] args) {
