@@ -1,0 +1,3 @@
+Wrench 1 45
+Beer 1 12
+Water 1 10
