@@ -85,4 +85,8 @@ public class Planet {
     public String getPlanetPicture() {
         return "assets/planets/" + name + ".png";
     }
+
+    public String getPlanetDialogueFile() {
+        return "planet_dialogues/" + name + "Dialogue.txt";
+    }
 }
