@@ -3,11 +3,14 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -21,8 +24,9 @@ import javax.swing.SpringLayout;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.Graphics;
+import java.awt.event.KeyListener;
 
-public class UserInterface implements Runnable {
+public class UserInterface implements Runnable, KeyListener {
     JFrame frame, shopFrame;
     JPanel mainPanel, currentTargetPanel, currentShipPanel, inputPanel, quadPanel;
     JButton mapButton, shipInventoryButton, currentQuestButton, fleetStatusButton, currentSystemButton;
@@ -31,6 +35,7 @@ public class UserInterface implements Runnable {
     ArrayList<Star> stars;
     int r;
     Random rand = new Random();
+    Scanner sc;
 
     public void getRandomNumber() {
         r = rand.nextInt(35);
@@ -55,6 +60,12 @@ public class UserInterface implements Runnable {
         mainTextBox.setLineWrap(true);
         mainTextBox.setWrapStyleWord(true);
         mainTextBox.setFont(new Font("OCR A Extended", Font.BOLD, 30));
+        try {
+            mainTextBox.setText(printDialogue());
+        } catch (FileNotFoundException e) {
+            System.err.println("Cannot find txt file, " + Game.currentPlanet.getPlanetDialogueFile());
+            e.printStackTrace();
+        }
         frame.add(mainTextBox);
 
         currentTargetPanel = new JPanel();
@@ -180,5 +191,29 @@ public class UserInterface implements Runnable {
             }
         });
         currentShipPanel.add(mapButton);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public String printDialogue() throws FileNotFoundException {
+        sc = new Scanner(new File(Game.currentPlanet.getPlanetDialogueFile()));
+        String s = sc.nextLine();
+        return s;
     }
 }
