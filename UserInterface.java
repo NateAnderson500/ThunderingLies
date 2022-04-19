@@ -83,7 +83,6 @@ public class UserInterface implements Runnable {
 						i++;
 					}
 				}
-                
                 getRandomNumber();
             }
         };
@@ -139,6 +138,10 @@ public class UserInterface implements Runnable {
                     public void windowClosing(WindowEvent e) {
                         shop.dispose();
                         frame.setVisible(true);
+                        Star s = new Star(currentShipPanel);
+                        s.start();
+                        stars.add(s);
+                        currentShipPanel.repaint();
                     }
                 });
             }
