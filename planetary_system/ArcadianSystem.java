@@ -60,7 +60,7 @@ public class ArcadianSystem {
         vanu = new Planet("Vanu", "A bitter planet, a strange mineral underground gives the planet a purple hue.", new String[]{"Macintyre", "Gandash"}, false);
         planets[12][0] = vanu;
 
-        gandash = new Planet("Gandash", "A metal planet, its poisonous metal gas rings are mined for its resources.", new String[]{"Vanu", "Artmeisia"}, false);
+        gandash = new Planet("Gandash", "A metal planet, its poisonous metal gas rings are mined for its resources.", new String[]{"Vanu", "Artemisia"}, false);
         planets[13][0] = gandash;
 
         artemisia = new Planet("Artemisia", "A inhospitable planet, its strange climate can vary from below freezing to temperatures similar to the sun.", new String[]{"Gandash"}, false);
