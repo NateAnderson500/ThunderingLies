@@ -29,7 +29,8 @@ import java.awt.event.KeyListener;
 public class UserInterface implements Runnable, KeyListener {
     JFrame frame, shopFrame;
     JPanel mainPanel, currentTargetPanel, currentShipPanel, inputPanel, quadPanel;
-    JButton mapButton, shipInventoryButton, currentQuestButton, fleetStatusButton, currentSystemButton, changePlanetButton;
+    JButton mapButton, shipInventoryButton, currentQuestButton, fleetStatusButton, currentSystemButton,
+            changePlanetButton;
     JTextArea mainTextBox;
     Shop shop;
     ArrayList<Star> stars;
@@ -107,7 +108,7 @@ public class UserInterface implements Runnable, KeyListener {
         inputPanel.setPreferredSize(new Dimension(400, 400));
         inputPanel.setBackground(Color.GREEN);
         frame.add(inputPanel);
-        
+
         changePlanetButton = new JButton("Change Planet");
         changePlanetButton.setPreferredSize(new Dimension(400, 100));
         changePlanetButton.setBackground(Color.BLACK);
@@ -238,7 +239,12 @@ public class UserInterface implements Runnable, KeyListener {
     }
 
     public String printDialogue() throws FileNotFoundException {
-        sc = new Scanner(new File(Game.currentPlanet.getPlanetDialogueFile()));
+        try {
+            sc = new Scanner(new File(Game.currentPlanet.getPlanetDialogueFile()));
+        } catch (FileNotFoundException e) {
+            System.err.println("Cannot find the dialogue file...");
+            e.printStackTrace();
+        }
         String s = sc.nextLine();
         return s;
     }
