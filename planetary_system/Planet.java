@@ -1,5 +1,7 @@
 package planetary_system;
 
+import java.util.ArrayList;
+
 public class Planet {
     String name;
     String description;
@@ -60,7 +62,8 @@ public class Planet {
     }
 
     /**
-     * This method returns the names of the planets that are adjacent to this planet.
+     * This method returns the names of the planets that are adjacent to this planet
+     * in a nice String.
      * 
      * @return The names of the planets that are adjacent to this planet.
      */
@@ -75,6 +78,23 @@ public class Planet {
         }
         return s;
     }
+
+    /**
+     * This method returns the names of the planets that are adjacent to this planet
+     * in an ArrayList. Using an ArrayList because some planets have one or two adjacent
+     * planets, and the way this method is called it will be easier to put the planet names
+     * into some sort of data structure.
+     * 
+     * @return The names of the planets that are adjacent to this planet.
+     */
+    public ArrayList<String> getAdjacentPlanetsArray() {
+        ArrayList<String> adjacentPlanetsList = new ArrayList<String>();
+        for (String s : adjacentPlanets) {
+            adjacentPlanetsList.add(s);
+        }
+        return adjacentPlanetsList;
+    }
+
 
     /**
      * This method gets the location of the .png file for the planet in the
