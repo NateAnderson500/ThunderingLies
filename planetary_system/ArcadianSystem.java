@@ -79,4 +79,17 @@ public class ArcadianSystem {
             }
         }
     }
+
+    public Planet getPlanet(String planet) {
+        String planetLower = planet.toLowerCase();
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (planets[i][j].name.toLowerCase().equals(planetLower)) {
+                    return planets[i][j];
+                }
+            }
+        }
+        return null;
+
+    }
 }
