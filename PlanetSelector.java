@@ -1,21 +1,23 @@
 import javax.swing.JFrame;
-import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Allows the user to select a {@code Planet} to travel to.
  * Used from the {@code UserInterface} class, i.e. it is called
  * when the user clicks the "Change Planet" button.
+ * 
+ * <p> Gets the one or two adjacent Planets to the current
+ * planet and displays them as {@code JButton}s. The user can then
+ * click on either one (or in some situations the only one) to change
+ * planets.
+ * <p>
  * 
  * @author Paul Brouillette and Nathaniel Anderson
  * @version April 20, 2022
@@ -27,6 +29,7 @@ public class PlanetSelector extends JFrame {
     protected JPanel panel;
     protected JLabel mapLabel;
     protected JComboBox<String> planets;
+    JButton planetLeft, planetRight;
 
     public PlanetSelector() {
         super("Planet Selector");
@@ -36,45 +39,43 @@ public class PlanetSelector extends JFrame {
         setResizable(false);
         setVisible(true);
 
-        // BufferedImage image = null;
-        // try {
-        //     image = ImageIO.read(new File("assets/misc/planetsColor.png"));
-        // } catch (IOException e1) {
-        //     System.err.println("Cannot find the map image");
-        //     e1.printStackTrace();
-        // }
-        // mapLabel = new JLabel(new ImageIcon(image));
-        //add(mapLabel);
-
-        planets = new JComboBox<String>();
-        planets.addItem("Corvus");
-        planets.addItem("Thantos");
-        planets.addItem("New Terra");
-        planets.addItem("Ligo");
-        planets.addItem("Labyrinth");
-        planets.addItem("Keres");
-        planets.addItem("Aesop");
-        planets.addItem("Uncas");
-        planets.addItem("Abenaki");
-        planets.addItem("Pollux");
-        planets.addItem("Boreas");
-        planets.addItem("Macintyre");
-        planets.addItem("Vanu");
-        planets.addItem("Gandash");
-        planets.addItem("Artemisia");
-        add(planets);
-
-        JButton confirm = new JButton("Confirm");
-        confirm.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String planet = (String) planets.getSelectedItem();
-                Game.currentPlanet = Game.arcadianSystem.getPlanet(planet);
-                dispose();
-                Game.ui.run();
-            }
-        });
-        add(confirm);
+        ArrayList<String> planetNames = Game.currentPlanet.getAdjacentPlanetsArray();
+        //If only one planet is adjacent, either Corvus or Artemisia, then only one JButton is needed
+        if (planetNames.size() == 1) {
+            planetLeft = new JButton(planetNames.get(0));
+            planetLeft.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Game.currentPlanet = Game.arcadianSystem.getPlanet(planetLeft.getText());
+                    dispose();
+                    Game.ui.run();
+                }
+            });
+            add(planetLeft);
+        }
+        //For most of the other planets, two JButtons are needed
+        else {
+            planetLeft = new JButton(planetNames.get(0));
+            planetLeft.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Game.currentPlanet = Game.arcadianSystem.getPlanet(planetLeft.getText());
+                    dispose();
+                    Game.ui.run();
+                }
+            });
+            planetRight = new JButton(planetNames.get(1));
+            planetRight.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Game.currentPlanet = Game.arcadianSystem.getPlanet(planetRight.getText());
+                    dispose();
+                    Game.ui.run();
+                }
+            });
+            add(planetLeft);
+            add(planetRight);
+        }
         pack();
     }
 }
