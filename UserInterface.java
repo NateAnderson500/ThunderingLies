@@ -29,27 +29,29 @@ import java.awt.event.KeyListener;
 public class UserInterface implements Runnable, KeyListener {
     JFrame frame, shopFrame;
     JPanel mainPanel, currentTargetPanel, currentShipPanel, inputPanel, quadPanel;
-    JButton mapButton, shipInventoryButton, currentQuestButton, fleetStatusButton, currentSystemButton;
+    JButton mapButton, shipInventoryButton, currentQuestButton, fleetStatusButton, currentSystemButton, changePlanetButton;
     JTextArea mainTextBox;
     Shop shop;
     ArrayList<Star> stars;
     int r;
     Random rand = new Random();
     Scanner sc;
+    PlanetSelector planetSelector;
 
     public void getRandomNumber() {
-        r = rand.nextInt(35);
+        r = rand.nextInt(40);
     }
 
     @Override
     public void run() {
-        frame = new JFrame("UI Test");
+        frame = new JFrame("Thundering Lies");
         frame.setSize(1225, 800);
         frame.setForeground(Color.BLACK);
         frame.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         stars = new ArrayList<Star>();
         r = 0;
 
@@ -72,7 +74,6 @@ public class UserInterface implements Runnable, KeyListener {
         currentTargetPanel.setPreferredSize(new Dimension(595, 400));
         frame.add(currentTargetPanel);
         currentTargetPanel.setBackground(Color.YELLOW);
-        
 
         currentShipPanel = new JPanel() {
             @Override
@@ -82,18 +83,18 @@ public class UserInterface implements Runnable, KeyListener {
                 if (r == 0) {
                     Star s = new Star(currentShipPanel);
                     s.start();
-                    stars.add(s);    
+                    stars.add(s);
                 }
                 int i = 0;
-				while (i < stars.size()) {
-					Star star = stars.get(i);
-					if (star.done()) {
-						stars.remove(i);
-					} else {
-						star.paint(g);
-						i++;
-					}
-				}
+                while (i < stars.size()) {
+                    Star star = stars.get(i);
+                    if (star.done()) {
+                        stars.remove(i);
+                    } else {
+                        star.paint(g);
+                        i++;
+                    }
+                }
                 getRandomNumber();
             }
         };
@@ -106,6 +107,31 @@ public class UserInterface implements Runnable, KeyListener {
         inputPanel.setPreferredSize(new Dimension(400, 400));
         inputPanel.setBackground(Color.GREEN);
         frame.add(inputPanel);
+        
+        changePlanetButton = new JButton("Change Planet");
+        changePlanetButton.setPreferredSize(new Dimension(400, 100));
+        changePlanetButton.setBackground(Color.BLACK);
+        changePlanetButton.setForeground(Color.WHITE);
+        changePlanetButton.setFont(new Font("OCR A Extended", Font.BOLD, 30));
+        changePlanetButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                planetSelector = new PlanetSelector();
+                planetSelector.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        planetSelector.dispose();
+                        frame.setVisible(true);
+                        Star s = new Star(currentShipPanel);
+                        s.start();
+                        stars.add(s);
+                        currentShipPanel.repaint();
+                    }
+                });
+            }
+        });
+        inputPanel.add(changePlanetButton);
 
         quadPanel = new JPanel(new FlowLayout());
         quadPanel.setPreferredSize(new Dimension(390, 400));
@@ -196,19 +222,19 @@ public class UserInterface implements Runnable, KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 
     public String printDialogue() throws FileNotFoundException {
