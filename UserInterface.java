@@ -124,7 +124,7 @@ public class UserInterface implements Runnable {
         changePlanetButton = new JButton("Change Planet");
         changePlanetButton.setPreferredSize(new Dimension(400, 100));
         changePlanetButton.setBackground(Color.BLACK);
-        changePlanetButton.setForeground(Color.WHITE);
+        //changePlanetButton.setForeground(Color.WHITE);
         changePlanetButton.setFont(new Font("OCR A Extended", Font.BOLD, 30));
         changePlanetButton.addActionListener(new AbstractAction() {
             @Override
