@@ -3,9 +3,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.awt.Image;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,14 +24,14 @@ import javax.swing.SpringLayout;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.Graphics;
-import java.awt.event.KeyListener;
 
-public class UserInterface implements Runnable, KeyListener {
+public class UserInterface implements Runnable {
     JFrame frame, shopFrame;
     JPanel mainPanel, currentTargetPanel, currentShipPanel, inputPanel, quadPanel;
     JButton mapButton, shipInventoryButton, currentQuestButton, fleetStatusButton, currentSystemButton,
             changePlanetButton;
     JTextArea mainTextBox;
+    JLabel planetPictureLabel;
     Shop shop;
     ArrayList<Star> stars;
     int r;
@@ -71,10 +71,22 @@ public class UserInterface implements Runnable, KeyListener {
         }
         frame.add(mainTextBox);
 
+        
+
+        BufferedImage bi = null;
+        try {
+            bi = ImageIO.read(new File(Game.currentPlanet.getPlanetPicture()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image newResizedImage = bi.getScaledInstance(375, 375, Image.SCALE_SMOOTH);
+
+        planetPictureLabel = new JLabel(new ImageIcon(newResizedImage));
         currentTargetPanel = new JPanel();
         currentTargetPanel.setPreferredSize(new Dimension(595, 400));
         frame.add(currentTargetPanel);
-        currentTargetPanel.setBackground(Color.YELLOW);
+        currentTargetPanel.add(planetPictureLabel);
+        currentTargetPanel.setBackground(Color.BLACK);
 
         currentShipPanel = new JPanel() {
             @Override
@@ -192,9 +204,8 @@ public class UserInterface implements Runnable, KeyListener {
         currentSystemButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ImageIcon image = new ImageIcon(Game.currentPlanet.getPlanetPicture());
                 JOptionPane.showMessageDialog(null, Game.currentPlanet.toString(), "Current System",
-                        JOptionPane.PLAIN_MESSAGE, image);
+                        JOptionPane.PLAIN_MESSAGE);
             }
         });
         quadPanel.add(currentSystemButton);
@@ -220,29 +231,11 @@ public class UserInterface implements Runnable, KeyListener {
         currentShipPanel.add(mapButton);
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
     public String printDialogue() throws FileNotFoundException {
         try {
             sc = new Scanner(new File(Game.currentPlanet.getPlanetDialogueFile()));
         } catch (FileNotFoundException e) {
-            System.err.println("Cannot find the dialogue file...");
+            System.err.println("Cannot find the dialogue file titled: " + Game.currentPlanet.getPlanetDialogueFile());
             e.printStackTrace();
         }
         String s = sc.nextLine();
