@@ -1,3 +1,6 @@
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import inventory_system.Inventory;
 import inventory_system.Item;
 import planetary_system.ArcadianSystem;
@@ -17,9 +20,15 @@ public class Game implements Runnable {
     
     @Override
     public void run() {
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         inventory.addItem(new Item("Wrench", 1, 45));
         arcadianSystem = new ArcadianSystem();
-        currentPlanet = arcadianSystem.pollux;
+        currentPlanet = arcadianSystem.vanu;
         ui = new UserInterface();
         ui.run();
     }
