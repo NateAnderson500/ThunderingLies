@@ -1,3 +1,6 @@
+import javax.swing.ImageIcon;
+import java.awt.Image;
+
 public class Ship {  
 
     String name;
@@ -7,6 +10,7 @@ public class Ship {
     int cargoCapacity;
     int cargoSpaceUsed;
     int attackPower;
+    Image shipImage;
 
     /**
      * Constructor for ship.
@@ -18,14 +22,16 @@ public class Ship {
      * @param cargoCapacity The cargo capacity of the ship.
      * @param cargoSpaceUsed The amount of cargo space used by the ship.
      * @param attackPower The attack power of the ship.
+     * @param shipImage The image of the ship.
      */
-    public Ship(String name, String description, Boolean playerOwned, int health, int cargoCapacity, int attackPower) {
+    public Ship(String name, String description, Boolean playerOwned, int health, int cargoCapacity, int attackPower, Image shipImage) {
         this.name = name;
         this.description = description;
         this.playerOwned = playerOwned;
         this.health = health;
         this.cargoCapacity = cargoCapacity;
         this.attackPower = attackPower;
+        this.shipImage = shipImage;
     }
 
     /**
@@ -100,6 +106,16 @@ public class Ship {
      */
     public String getShipPicture() {
         return "assets/ship/" + name + ".png";
+    }
+
+    /**
+     * Returns the Image of the current ship that can immediately be used
+     * to display the ship on the UI as it is an Image.
+     * 
+     * @return The {@code Image} of the current ship.
+     */
+    public Image getShipImage() {
+        return shipImage;
     }
 }
 
