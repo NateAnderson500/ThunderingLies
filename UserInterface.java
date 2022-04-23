@@ -108,6 +108,7 @@ public class UserInterface implements Runnable {
                         i++;
                     }
                 }
+                g.drawImage(Game.currentShip.getShipImage(), 25, 0, null);
                 getRandomNumber();
             }
         };
