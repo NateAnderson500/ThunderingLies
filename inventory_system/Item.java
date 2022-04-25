@@ -27,7 +27,7 @@ public class Item {
      * @param buyPrice The buy price of the item.
      * @param sellPrice The sell price of the item.
      */
-    public Item(String name, int quantity, double buyPrice) {
+    public  Item(String name, int quantity, double buyPrice) {
         this.name = name;
         this.quantity = quantity;
         this.buyPrice = buyPrice;
