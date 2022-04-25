@@ -39,7 +39,7 @@ public class Game implements Runnable {
         //Create the image for the ship to be passed in as a parameter
         BufferedImage bi = null;
         try {
-            bi = ImageIO.read(new File("assets/ships/regularship.png"));
+            bi = ImageIO.read(new File("./assets/ships/RegularShip.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
