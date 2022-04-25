@@ -230,6 +230,13 @@ public class UserInterface implements Runnable {
             }
         });
         currentShipPanel.add(mapButton);
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Game.saveGame.save(Game.currentPlanet.getName(), 0);
+            }
+        });
     }
 
     public String printDialogue() throws FileNotFoundException {
