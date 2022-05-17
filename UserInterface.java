@@ -29,7 +29,7 @@ public class UserInterface implements Runnable {
     JFrame frame, shopFrame;
     JPanel mainPanel, currentTargetPanel, currentShipPanel, inputPanel, quadPanel;
     JButton mapButton, shipInventoryButton, currentQuestButton, fleetStatusButton, currentSystemButton,
-            changePlanetButton;
+            changePlanetButton, dockAtStationButton;
     JTextArea mainTextBox;
     JLabel planetPictureLabel;
     Shop shop;
@@ -122,9 +122,10 @@ public class UserInterface implements Runnable {
         inputPanel.setBackground(Color.GREEN);
         frame.add(inputPanel);
 
+        //Change planet button
         changePlanetButton = new JButton("Change Planet");
         changePlanetButton.setPreferredSize(new Dimension(400, 100));
-        changePlanetButton.setBackground(Color.BLACK);
+        changePlanetButton.setBackground(Color.GRAY);
         //changePlanetButton.setForeground(Color.WHITE);
         changePlanetButton.setFont(new Font("OCR A Extended", Font.BOLD, 30));
         changePlanetButton.addActionListener(new AbstractAction() {
@@ -146,6 +147,14 @@ public class UserInterface implements Runnable {
             }
         });
         inputPanel.add(changePlanetButton);
+
+        //Dock at station button
+        dockAtStationButton = new JButton("Dock at station");
+        dockAtStationButton.setPreferredSize(new Dimension(400, 100));
+        dockAtStationButton.setBackground(Color.GRAY);
+        //dockAtStationButton.setForeground(Color.WHITE);
+        dockAtStationButton.setFont(new Font("OCR A Extended", Font.BOLD, 30));
+        inputPanel.add(dockAtStationButton);
 
         quadPanel = new JPanel(new FlowLayout());
         quadPanel.setPreferredSize(new Dimension(390, 400));
