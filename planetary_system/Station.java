@@ -10,11 +10,13 @@ public class Station {
     /**
      * Constructor for station.
      * 
+     * @author Nate Anderson
      * @param name The name of the station.
      * @param description The description of the station.
-     * @param adjacentstations The names of the stations that are adjacent to this station.
+     * @param inOrbitOf The name of the planet the station is in orbit of.
      * @param occupied Whether or not the station is occupied, if a station is not "Space", this is 
      * true
+     * @param type The type of station, either "Space" or "Station".
      */
     public Station(String name, String description, String inOrbitOf, Boolean occupied, String type) {
         this.name = name;
